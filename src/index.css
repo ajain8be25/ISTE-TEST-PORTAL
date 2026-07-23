@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+@theme {
+  /* Palette: institutional deep teal + brass accent (admit-card / exam-hall register) */
+  --color-ink: #FFFFFF;
+  --color-paper:#0B1528;
+  --color-paper-raised: #13223C;
+  --color-teal-950: #233554;
+  --color-teal-900: #3B82F6;
+  --color-teal-700: #1b5e5f;
+  --color-teal-100: #041217;
+  --color-brass-600: #b9772e;
+  --color-brass-500: #c98a3e;
+  --color-brass-300: #e4b476;
+  --color-brass-100: #f6e8d2;
+  --color-brick-600: #a33a25;
+  --color-brick-500: #06B6D4;
+  --color-line: #d8dad3;
+
+  --font-display: "Space Grotesk", "Inter", sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-body);
+    background: var(--color-paper);
+    color: var(--color-ink);
+    color-scheme:dark;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100svh;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brass-500);
+    outline-offset: 2px;
+  }
+}
