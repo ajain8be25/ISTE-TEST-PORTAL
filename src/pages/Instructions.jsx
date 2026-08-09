@@ -19,7 +19,7 @@ const GENERAL_RULES = [
 const TECHNICAL_RULES = [
   'Ensure a stable internet connection for the entire duration.',
   'Do not refresh the page or use the browser back button during the test.',
-  'Strictly restrain from switching tabs or windows once the test has started as i will get you eliminated',
+  'Do not switch tabs or windows once the test has started — this may result in disqualification.',
   'Use a desktop, laptop, or tablet for the best experience.',
 ]
 
@@ -33,44 +33,46 @@ export default function Instructions() {
   }
 
   return (
-    <PageContainer className="max-w-2xl">
+    <PageContainer className="max-w-2xl" accent="cyan" step={2}>
       <header className="mb-8 text-center">
-        <p className="font-mono text-xs uppercase tracking-[0.2em] text-brass-600">Step 2 of 4</p>
-        <h1 className="mt-2 font-display text-3xl font-semibold text-teal-950 sm:text-4xl">
+        <p className="font-mono text-xs uppercase tracking-[0.2em] text-cyan-600">Step 2 of 4</p>
+        <h1 className="mt-2 font-display text-3xl font-semibold text-ink sm:text-4xl">
           Test Instructions
         </h1>
         {candidate?.name && (
-          <p className="mt-2 text-sm text-ink/60">
+          <p className="mt-2 text-sm text-ink-soft">
             Welcome, <span className="font-medium text-ink">{candidate.name}</span>. Please read carefully before you begin.
           </p>
         )}
       </header>
 
-      <Card className="mb-6 flex flex-col items-center gap-3 p-6 sm:p-8">
+      <Card accent="cyan" className="mb-6 flex flex-col items-center gap-3 p-6 sm:p-8">
         <Timer
           initialSeconds={COUNTDOWN_TO_START_SECONDS}
           label="Test Opens In"
           onExpire={() => {}}
           criticalThreshold={10}
         />
-        <p className="text-center text-xs text-ink/50">
+        <p className="text-center text-xs text-ink-soft">
           This is placeholder timing. Connect a scheduled start time from the backend to control availability.
         </p>
       </Card>
 
-      <Card stub className="p-6 sm:p-8">
+      <Card stub accent="cyan" className="p-6 sm:p-8">
         <div className="mb-6 flex items-center justify-between border-b border-dashed border-line pb-4">
-          <h2 className="font-display text-lg font-semibold text-teal-950">Guidelines</h2>
-          <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-ink/40">Form 02</span>
+          <h2 className="font-display text-lg font-semibold text-ink">Guidelines</h2>
+          <span className="rounded-full bg-cyan-100 px-2.5 py-1 font-mono text-[11px] uppercase tracking-[0.12em] text-cyan-600">
+            Form 02
+          </span>
         </div>
 
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
           <div>
-            <h3 className="mb-3 font-mono text-xs uppercase tracking-[0.12em] text-teal-700">General</h3>
+            <h3 className="mb-3 font-mono text-xs uppercase tracking-[0.12em] text-primary-600">General</h3>
             <ul className="flex flex-col gap-2.5">
               {GENERAL_RULES.map((rule) => (
-                <li key={rule} className="flex items-start gap-2.5 text-sm text-ink/75">
-                  <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-teal-700" />
+                <li key={rule} className="flex items-start gap-2.5 text-sm text-ink/80">
+                  <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary-500" />
                   {rule}
                 </li>
               ))}
@@ -78,11 +80,11 @@ export default function Instructions() {
           </div>
 
           <div>
-            <h3 className="mb-3 font-mono text-xs uppercase tracking-[0.12em] text-brass-600">Technical</h3>
+            <h3 className="mb-3 font-mono text-xs uppercase tracking-[0.12em] text-amber-600">Technical</h3>
             <ul className="flex flex-col gap-2.5">
               {TECHNICAL_RULES.map((rule) => (
-                <li key={rule} className="flex items-start gap-2.5 text-sm text-ink/75">
-                  <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-brass-500" />
+                <li key={rule} className="flex items-start gap-2.5 text-sm text-ink/80">
+                  <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-amber-500" />
                   {rule}
                 </li>
               ))}
@@ -90,8 +92,8 @@ export default function Instructions() {
           </div>
         </div>
 
-        <div className="mt-8 rounded-lg border border-brick-500/25 bg-brick-500/5 p-4">
-          <p className="text-xs text-brick-600">
+        <div className="mt-8 rounded-xl border border-red-500/25 bg-red-100/50 p-4">
+          <p className="text-xs text-red-600">
             <span className="font-semibold">Important:</span> once you start, the test cannot be paused. Make sure you're ready before proceeding.
           </p>
         </div>

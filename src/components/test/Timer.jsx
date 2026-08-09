@@ -9,8 +9,8 @@ function formatTime(totalSeconds) {
 
 /**
  * Counts down from `initialSeconds`. Calls `onExpire` once when it hits 0.
- * `criticalThreshold` (seconds) switches the digits to the danger color
- * as a visual urgency cue.
+ * `criticalThreshold` (seconds) switches to a pulsing red pill as a
+ * visual urgency cue.
  */
 export default function Timer({ initialSeconds, onExpire, label = 'Time Remaining', criticalThreshold = 60 }) {
   const [secondsLeft, setSecondsLeft] = useState(initialSeconds)
@@ -39,12 +39,14 @@ export default function Timer({ initialSeconds, onExpire, label = 'Time Remainin
   const isCritical = secondsLeft <= criticalThreshold
 
   return (
-    <div className="flex flex-col items-center gap-1">
-      <span className="font-mono text-[11px] uppercase tracking-[0.15em] text-ink/50">{label}</span>
+    <div className="flex flex-col items-center gap-1.5">
+      <span className="font-mono text-[11px] uppercase tracking-[0.15em] text-ink-soft">{label}</span>
       <span
-        className={`font-mono text-3xl font-semibold tabular-nums sm:text-4xl ${
-          isCritical ? 'text-brick-600' : 'text-teal-950'
-        } ${isCritical ? 'animate-pulse' : ''}`}
+        className={`rounded-2xl px-4 py-1.5 font-mono text-3xl font-semibold tabular-nums sm:text-4xl ${
+          isCritical
+            ? 'bg-red-100 text-red-600 animate-ring-pulse'
+            : 'bg-gradient-to-r from-primary-100 to-cyan-100 text-primary-700'
+        }`}
       >
         {formatTime(secondsLeft)}
       </span>
