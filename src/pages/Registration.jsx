@@ -19,7 +19,7 @@ const BRANCH_OPTIONS = [
   { value: 'OTHER', label: 'Other' },
 ]
 
-const INITIAL_FORM = { name: '', rollNumber: '', email: '', branch: '' }
+const INITIAL_FORM = { name: '', rollNumber: '', email: '', branch: '', customBranch: '' }
 
 function validate(form) {
   const errors = {}
@@ -42,6 +42,8 @@ function validate(form) {
 
   if (!form.branch) {
     errors.branch = 'Select your branch.'
+  } else if (form.branch === 'OTHER' && !form.customBranch.trim()) {
+    errors.customBranch = 'Enter your branch name.'
   }
 
   return errors
@@ -70,9 +72,17 @@ export default function Registration() {
     setSubmitError('')
 
     try {
-      const result = await registerCandidate(form)
+      // If "Other" was picked, send the typed-in branch name as the
+      // actual branch value so the backend/downstream pages don't need
+      // to know about the OTHER/customBranch distinction.
+      const payload =
+        form.branch === 'OTHER'
+          ? { ...form, branch: form.customBranch.trim() }
+          : form
+
+      const result = await registerCandidate(payload)
       if (result?.success) {
-        navigate('/instructions', { state: { candidate: form, candidateId: result.candidateId } })
+        navigate('/instructions', { state: { candidate: payload, candidateId: result.candidateId } })
       } else {
         setSubmitError(result?.message || 'Registration failed. Please try again.')
       }
@@ -84,26 +94,29 @@ export default function Registration() {
   }
 
   return (
-    <PageContainer className="max-w-xl">
-      <div className="image" class="flex justify-start">
-        <img 
-  src="https://membership.isteonline.in/static/media/istelogo2.055fc6da.png" 
-  alt="Iste Logo" 
-  className="fixed top-0 left-0 w-24 h-auto z-50 rounded-br-xl" 
-/>
-</div>
+    <PageContainer className="max-w-xl" accent="violet" step={1}>
+      <img
+        src="https://membership.isteonline.in/static/media/istelogo2.055fc6da.png"
+        alt="ISTE Logo"
+        className="fixed top-4 left-4 z-50 h-12 w-auto rounded-lg bg-white/80 p-1 shadow-sm backdrop-blur sm:h-14"
+      />
+
       <header className="mb-8 text-center">
-        <p className="font-mono text-xs uppercase tracking-[0.2em] text-brass-600">ISTE Student Chapter</p>
-        <h1 className="mt-2 font-display text-3xl font-semibold text-teal-950 sm:text-4xl">
-          Orientation Test Portal
+        <p className="font-mono text-xs uppercase tracking-[0.2em] text-primary-600">ISTE Student Chapter</p>
+        <h1 className="mt-2 font-display text-3xl font-semibold text-ink sm:text-4xl">
+          <span className="bg-gradient-to-r from-primary-600 via-pink-500 to-cyan-600 bg-clip-text text-transparent">
+            Orientation Test Portal
+          </span>
         </h1>
-        <p className="mt-2 text-sm text-ink/60">Register below to receive your test admission details.</p>
+        <p className="mt-2 text-sm text-ink-soft">Register below to receive your test admission details.</p>
       </header>
 
-      <Card stub className="p-6 sm:p-8">
+      <Card stub accent="violet" className="p-6 sm:p-8">
         <div className="mb-6 flex items-center justify-between border-b border-dashed border-line pb-4">
-          <h2 className="font-display text-lg font-semibold text-teal-950">Candidate Registration</h2>
-          <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-ink/40">Form 01</span>
+          <h2 className="font-display text-lg font-semibold text-ink">Candidate Registration</h2>
+          <span className="rounded-full bg-primary-100 px-2.5 py-1 font-mono text-[11px] uppercase tracking-[0.12em] text-primary-600">
+            Form 01
+          </span>
         </div>
 
         <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
@@ -138,7 +151,7 @@ export default function Registration() {
           />
 
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-            <FormInput
+            <FormSelect
               label="Branch"
               name="branch"
               value={form.branch}
@@ -147,11 +160,20 @@ export default function Registration() {
               options={BRANCH_OPTIONS}
             />
 
-            
+            {form.branch === 'OTHER' && (
+              <FormInput
+                label="Enter Your Branch"
+                name="customBranch"
+                value={form.customBranch}
+                onChange={handleChange}
+                error={errors.customBranch}
+                placeholder="e.g. Biotechnology"
+              />
+            )}
           </div>
 
           {submitError && (
-            <p role="alert" className="rounded-lg border border-brick-500/30 bg-brick-500/5 px-3.5 py-2.5 text-sm text-brick-600">
+            <p role="alert" className="rounded-xl border border-red-500/30 bg-red-100/60 px-3.5 py-2.5 text-sm text-red-600">
               {submitError}
             </p>
           )}
@@ -161,10 +183,6 @@ export default function Registration() {
           </Button>
         </form>
       </Card>
-
-      <p className="mt-6 text-center font-mono text-[11px] uppercase tracking-[0.12em] text-ink/35">
-        Backend integration point: registerCandidate(formData) — src/api/testApi.js
-      </p>
     </PageContainer>
   )
 }

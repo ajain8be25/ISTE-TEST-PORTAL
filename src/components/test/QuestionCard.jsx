@@ -9,12 +9,16 @@ const OPTION_KEYS = ['A', 'B', 'C', 'D']
  */
 export default function QuestionCard({ question, questionNumber, totalQuestions, selectedOption, onSelectOption }) {
   return (
-    <Card stub className="p-6 sm:p-8">
+    <Card stub accent="violet" className="animate-fade-up p-6 sm:p-8" key={question.id}>
       <div className="mb-6 flex items-center justify-between border-b border-dashed border-line pb-4">
-        <span className="font-mono text-xs uppercase tracking-[0.12em] text-teal-700">
-          Question {questionNumber} <span className="text-ink/40">of {totalQuestions}</span>
+        <span className="font-mono text-xs uppercase tracking-[0.12em] text-primary-600">
+          Question {questionNumber} <span className="text-ink-soft">of {totalQuestions}</span>
         </span>
-        <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-ink/40">
+        <span
+          className={`rounded-full px-2.5 py-1 font-mono text-[11px] uppercase tracking-[0.12em] ${
+            selectedOption ? 'bg-green-100 text-green-600' : 'bg-surface-alt text-ink-soft'
+          }`}
+        >
           {selectedOption ? 'Answered' : 'Not Answered'}
         </span>
       </div>

@@ -98,8 +98,8 @@ export default function Test() {
 
   if (isLoading) {
     return (
-      <PageContainer className="max-w-2xl">
-        <Card className="p-6 sm:p-8">
+      <PageContainer className="max-w-2xl" accent="violet" step={3}>
+        <Card accent="violet" className="p-6 sm:p-8">
           <LoadingSpinner label="Loading questions…" size="lg" />
         </Card>
       </PageContainer>
@@ -108,9 +108,9 @@ export default function Test() {
 
   if (loadError) {
     return (
-      <PageContainer className="max-w-2xl">
-        <Card className="p-6 text-center sm:p-8">
-          <p className="text-sm text-brick-600">{loadError}</p>
+      <PageContainer className="max-w-2xl" accent="violet" step={3}>
+        <Card accent="violet" className="p-6 text-center sm:p-8">
+          <p className="text-sm text-red-600">{loadError}</p>
         </Card>
       </PageContainer>
     )
@@ -118,10 +118,10 @@ export default function Test() {
 
   if (totalQuestions === 0) {
     return (
-      <PageContainer className="max-w-2xl">
-        <Card className="p-6 text-center sm:p-8">
-          <h2 className="mb-2 font-display text-lg font-semibold text-teal-950">No Questions Available</h2>
-          <p className="text-sm text-ink/60">
+      <PageContainer className="max-w-2xl" accent="violet" step={3}>
+        <Card accent="violet" className="p-6 text-center sm:p-8">
+          <h2 className="mb-2 font-display text-lg font-semibold text-ink">No Questions Available</h2>
+          <p className="text-sm text-ink-soft">
             getQuestions() returned an empty set. Connect the backend in src/api/testApi.js to load the question bank.
           </p>
         </Card>
@@ -130,16 +130,16 @@ export default function Test() {
   }
 
   return (
-    <PageContainer className="max-w-2xl">
+    <PageContainer className="max-w-2xl" accent="violet" step={3}>
       <header className="mb-6 flex items-center justify-between">
         <div>
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-brass-600">Step 3 of 4</p>
-          <h1 className="mt-1 font-display text-2xl font-semibold text-teal-950 sm:text-3xl">Test in Progress</h1>
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-primary-600">Step 3 of 4</p>
+          <h1 className="mt-1 font-display text-2xl font-semibold text-ink sm:text-3xl">Test in Progress</h1>
         </div>
         <Timer initialSeconds={TEST_DURATION_SECONDS} onExpire={handleAutoSubmit} criticalThreshold={60} />
       </header>
 
-      <Card className="mb-6 p-4 sm:p-5">
+      <Card accent="violet" className="mb-6 p-4 sm:p-5">
         <QuestionNavigator
           totalQuestions={totalQuestions}
           currentIndex={currentIndex}
@@ -157,7 +157,7 @@ export default function Test() {
       />
 
       {submitError && (
-        <p role="alert" className="mt-4 rounded-lg border border-brick-500/30 bg-brick-500/5 px-3.5 py-2.5 text-sm text-brick-600">
+        <p role="alert" className="mt-4 rounded-xl border border-red-500/30 bg-red-100/60 px-3.5 py-2.5 text-sm text-red-600">
           {submitError}
         </p>
       )}

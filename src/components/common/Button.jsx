@@ -1,12 +1,12 @@
 const VARIANT_CLASSES = {
   primary:
-    'bg-teal-900 text-paper hover:bg-teal-700 focus-visible:outline-brass-500 disabled:bg-teal-900/40',
+    'bg-gradient-to-r from-primary-600 to-primary-500 text-white shadow-md shadow-primary-500/25 hover:shadow-lg hover:shadow-primary-500/35 hover:-translate-y-0.5 focus-visible:outline-primary-600 disabled:from-primary-300 disabled:to-primary-300 disabled:shadow-none disabled:translate-y-0',
   brass:
-    'bg-brass-500 text-teal-950 hover:bg-brass-600 focus-visible:outline-teal-900 disabled:bg-brass-500/40',
+    'bg-gradient-to-r from-amber-500 to-pink-500 text-white shadow-md shadow-amber-500/25 hover:shadow-lg hover:shadow-pink-500/35 hover:-translate-y-0.5 focus-visible:outline-amber-600 disabled:from-amber-200 disabled:to-pink-200 disabled:shadow-none disabled:translate-y-0',
   secondary:
-    'bg-transparent text-teal-900 border border-teal-900/30 hover:bg-teal-100 disabled:text-teal-900/30 disabled:border-teal-900/10',
+    'bg-white text-primary-700 border border-primary-200 hover:bg-primary-100 hover:-translate-y-0.5 disabled:text-ink-soft/40 disabled:border-line disabled:translate-y-0',
   danger:
-    'bg-brick-500 text-paper hover:bg-brick-600 focus-visible:outline-brick-500 disabled:bg-brick-500/40',
+    'bg-gradient-to-r from-red-600 to-pink-500 text-white shadow-md shadow-red-500/25 hover:shadow-lg hover:-translate-y-0.5 focus-visible:outline-red-500 disabled:from-red-200 disabled:to-pink-200 disabled:shadow-none disabled:translate-y-0',
 }
 
 /**
@@ -26,7 +26,7 @@ export default function Button({
     <button
       type={type}
       disabled={disabled}
-      className={`inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 font-display text-sm font-semibold tracking-wide transition-colors duration-150 disabled:cursor-not-allowed ${VARIANT_CLASSES[variant]} ${className}`}
+      className={`inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 font-display text-sm font-semibold tracking-wide transition-all duration-200 disabled:cursor-not-allowed ${VARIANT_CLASSES[variant]} ${className}`}
       {...rest}
     >
       {children}

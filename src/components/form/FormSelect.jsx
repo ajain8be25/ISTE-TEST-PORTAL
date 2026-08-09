@@ -8,7 +8,7 @@ export default function FormSelect({ label, name, value, onChange, error, option
 
   return (
     <div className="flex flex-col gap-1.5">
-      <label htmlFor={inputId} className="font-mono text-xs uppercase tracking-[0.12em] text-teal-900/80">
+      <label htmlFor={inputId} className="font-mono text-xs uppercase tracking-[0.12em] text-primary-700">
         {label}
       </label>
       <select
@@ -18,9 +18,9 @@ export default function FormSelect({ label, name, value, onChange, error, option
         onChange={onChange}
         aria-invalid={Boolean(error)}
         aria-describedby={error ? errorId : undefined}
-        className={`rounded-lg border bg-paper px-3.5 py-2.5 text-sm text-ink outline-none transition-colors focus:border-teal-900 ${
-          error ? 'border-brick-500' : 'border-line'
-        } ${value === '' ? 'text-ink/35' : ''}`}
+        className={`rounded-xl border-2 bg-surface-alt/40 px-3.5 py-2.5 text-sm text-ink outline-none transition-colors focus:border-primary-500 focus:bg-white ${
+          error ? 'border-red-500' : 'border-line'
+        } ${value === '' ? 'text-ink-soft/50' : ''}`}
       >
         <option value="" disabled>
           {placeholder}
@@ -32,7 +32,7 @@ export default function FormSelect({ label, name, value, onChange, error, option
         ))}
       </select>
       {error && (
-        <p id={errorId} className="text-xs text-brick-600">
+        <p id={errorId} className="text-xs font-medium text-red-600">
           {error}
         </p>
       )}

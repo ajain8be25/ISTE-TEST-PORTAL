@@ -1,5 +1,5 @@
 /**
- * Grid of question numbers for quick jumping. Filled dots (brass)
+ * Grid of question numbers for quick jumping. Filled dots (green)
  * indicate an answered question, echoing an OMR answer sheet.
  */
 export default function QuestionNavigator({ totalQuestions, currentIndex, answeredIndices, onJumpTo }) {
@@ -16,12 +16,12 @@ export default function QuestionNavigator({ totalQuestions, currentIndex, answer
             onClick={() => onJumpTo(i)}
             aria-current={isCurrent ? 'true' : undefined}
             aria-label={`Question ${i + 1}${isAnswered ? ', answered' : ', not answered'}`}
-            className={`flex h-8 w-8 items-center justify-center rounded-md font-mono text-xs font-medium transition-colors ${
+            className={`flex h-8 w-8 items-center justify-center rounded-lg font-mono text-xs font-semibold transition-all duration-150 ${
               isCurrent
-                ? 'bg-teal-900 text-paper'
+                ? 'bg-gradient-to-br from-primary-600 to-primary-500 text-white shadow-sm shadow-primary-500/40 scale-105'
                 : isAnswered
-                  ? 'bg-brass-100 text-brass-600 border border-brass-300'
-                  : 'bg-paper text-ink/50 border border-line hover:border-teal-700/50'
+                  ? 'bg-green-100 text-green-600 border border-green-500/30 hover:-translate-y-0.5'
+                  : 'bg-surface text-ink-soft border border-line hover:border-primary-300 hover:-translate-y-0.5'
             }`}
           >
             {i + 1}
