@@ -127,14 +127,12 @@ a public repository.
 
 ### 5. Start the Development Server
 
-For React:
-
+step 0: Install the node modules in the cloned repo by 
 ```bash
-npm run dev
+npm install
 ```
 
-For Vue:
-
+Step 1: Run it on the local server..
 ```bash
 npm run dev
 ```
